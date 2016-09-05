@@ -97,7 +97,7 @@ OS X 、iOS系统架构">
 <meta property="og:image" content="http://yoursite.com/images/Mach_Exceptions/osx_architecture-kernels_drivers_2x.png">
 <meta property="og:image" content="http://yoursite.com/images/Mach_Exceptions/exception_c_signal.png">
 <meta property="og:image" content="http://yoursite.com/images/Mach_Exceptions/flow_path.png">
-<meta property="og:updated_time" content="2016-09-05T20:31:57.000Z">
+<meta property="og:updated_time" content="2016-09-05T20:38:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈Mach Exceptions">
 <meta name="twitter:description" content="前言大家都可能都在自己的应用中集成Crash收集服务，通常使用NSSetUncaughtExceptionHandler() + signal() / sigaction()的方式。它可以帮助我们收集到大部分Crash，直到后来发现stack overflow并不能被以上方法扑捉到，而且其它一些SDK也未能收集。那这篇文章简单介绍下Mach异常与signal的联系。
@@ -351,7 +351,7 @@ OS X 、iOS系统架构">
 <p>Exception Type:  EXC_CRASH (SIGABRT)<br>Exception Codes: 0x0000000000000000, 0x0000000000000000</p>
 </blockquote>
 <p>所以尽管Mach exception handle 比 UNIX signal handle 更有优势，但我们还是须要注册signal handle用于处理EXC_SOFTWARE/EXC_CRASH。</p>
-<p>由于篇幅有限，有些细节可能并没有展现出来，如果你想有深入的了解，可已阅读下面参考文献，或者一些开源框架。最后，希望这篇文章可以帮助你了解Mach exception。</p>
+<p>由于篇幅有限，有些细节可能并没有展现出来，如果你想有深入的了解，可以阅读下面参考文献，或者一些开源框架。最后，希望这篇文章可以帮助你了解Mach exception。</p>
 <hr>
 <p>参考文献:<br><a href="https://developer.apple.com/library/mac/documentation/Darwin/Conceptual/KernelProgramming/Architecture/Architecture.html#//apple_ref/doc/uid/TP30000905-CH1g-CACDAEDC" target="_blank" rel="external">Apple Kernel Programming Guide</a><br><a href="[http://nianxi.net/notes/ios-crash-reporter](http://nianxi.net/notes/ios-crash-reporter">漫谈iOS Crash收集框架</a>)<br>Mac OS X and iOS Internals：To the Apple’s Core(中文译名:深入解析 MAC OS X &amp; IOS 操作系统)<br><a href="https://www.mikeash.com/pyblog/friday-qa-2013-01-11-mach-exception-handlers.html" title="英文" target="_blank" rel="external">Mach Exception Handlers</a><br><a href="http://opensource.apple.com/tarballs/xnu/xnu-3248.60.10.tar.gz" target="_blank" rel="external">xnu-3248.60.10.tar.gz</a><br><a href="https://developer.apple.com/videos/play/wwdc2010/317/" target="_blank" rel="external">Understanding Crash Reports on iPhone OS（wwdc）</a><br><a href="https://developer.apple.com/library/ios/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-STACKTRACE" target="_blank" rel="external">Understanding and Analyzing iOS Application Crash Reports</a></p>
 
