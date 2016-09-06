@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -84,12 +84,26 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jamin's zone">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="前言大家都可能都在自己的应用中集成Crash收集服务，通常使用NSSetUncaughtExceptionHandler() + signal() / sigaction()的方式。它可以帮助我们收集到大部分Crash，直到后来发现stack overflow并不能被以上方法扑捉到，而且其它一些SDK也未能收集。那这篇文章简单介绍下Mach异常与signal的联系。
+
+OS X 、iOS系统架构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Mach Exceptions">
+<meta property="og:url" content="http://yoursite.com/2016/09/01/Mach_Exceptions/index.html">
 <meta property="og:site_name" content="Jamin's zone">
+<meta property="og:description" content="前言大家都可能都在自己的应用中集成Crash收集服务，通常使用NSSetUncaughtExceptionHandler() + signal() / sigaction()的方式。它可以帮助我们收集到大部分Crash，直到后来发现stack overflow并不能被以上方法扑捉到，而且其它一些SDK也未能收集。那这篇文章简单介绍下Mach异常与signal的联系。
+
+OS X 、iOS系统架构">
+<meta property="og:image" content="http://yoursite.com/images/Mach_Exceptions/osx_architecture-kernels_drivers_2x.png">
+<meta property="og:image" content="http://yoursite.com/images/Mach_Exceptions/exception_c_signal.png">
+<meta property="og:image" content="http://yoursite.com/images/Mach_Exceptions/flow_path.png">
+<meta property="og:updated_time" content="2016-09-06T07:10:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jamin's zone">
+<meta name="twitter:title" content="浅谈Mach Exceptions">
+<meta name="twitter:description" content="前言大家都可能都在自己的应用中集成Crash收集服务，通常使用NSSetUncaughtExceptionHandler() + signal() / sigaction()的方式。它可以帮助我们收集到大部分Crash，直到后来发现stack overflow并不能被以上方法扑捉到，而且其它一些SDK也未能收集。那这篇文章简单介绍下Mach异常与signal的联系。
+
+OS X 、iOS系统架构">
+<meta name="twitter:image" content="http://yoursite.com/images/Mach_Exceptions/osx_architecture-kernels_drivers_2x.png">
 
 
 
@@ -110,9 +124,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/01/Mach_Exceptions/"/>
 
-  <title> Jamin's zone </title>
+  <title> 浅谈Mach Exceptions | Jamin's zone </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -133,9 +147,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -212,9 +224,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -234,10 +246,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/09/01/Mach_Exceptions/" itemprop="url">
-                  浅谈Mach Exceptions
-                </a>
+                浅谈Mach Exceptions
               
             
           </h1>
@@ -296,9 +305,7 @@
       
 
       
-        
-          
-            <!-- 2016-08-24 04:34:05 -->
+        <!-- 2016-08-24 04:34:05 -->
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>大家都可能都在自己的应用中集成Crash收集服务，通常使用<code>NSSetUncaughtExceptionHandler()</code> + <code>signal() / sigaction()</code>的方式。它可以帮助我们收集到大部分Crash，直到后来发现stack overflow并不能被以上方法扑捉到，而且其它一些SDK也未能收集。那这篇文章简单介绍下Mach异常与signal的联系。</p>
 <hr>
 <h1 id="OS-X-、iOS系统架构"><a href="#OS-X-、iOS系统架构" class="headerlink" title="OS X 、iOS系统架构"></a>OS X 、iOS系统架构</h1><p><img src="/images/Mach_Exceptions/osx_architecture-kernels_drivers_2x.png" alt="osx_architecture-kernels_drivers"></p>
@@ -349,160 +356,59 @@
 <hr>
 <p>参考文献:<br><a href="https://developer.apple.com/library/mac/documentation/Darwin/Conceptual/KernelProgramming/Architecture/Architecture.html#//apple_ref/doc/uid/TP30000905-CH1g-CACDAEDC" target="_blank" rel="external">Apple Kernel Programming Guide</a><br><a href="[http://nianxi.net/notes/ios-crash-reporter](http://nianxi.net/notes/ios-crash-reporter">漫谈iOS Crash收集框架</a>)<br>Mac OS X and iOS Internals：To the Apple’s Core(中文译名:深入解析 MAC OS X &amp; IOS 操作系统)<br><a href="https://www.mikeash.com/pyblog/friday-qa-2013-01-11-mach-exception-handlers.html" title="英文" target="_blank" rel="external">Mach Exception Handlers</a><br><a href="http://opensource.apple.com/tarballs/xnu/xnu-3248.60.10.tar.gz" target="_blank" rel="external">xnu-3248.60.10.tar.gz</a><br><a href="https://developer.apple.com/videos/play/wwdc2010/317/" target="_blank" rel="external">Understanding Crash Reports on iPhone OS（wwdc）</a><br><a href="https://developer.apple.com/library/ios/technotes/tn2151/_index.html#//apple_ref/doc/uid/DTS40008184-CH1-STACKTRACE" target="_blank" rel="external">Understanding and Analyzing iOS Application Crash Reports</a></p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/24/start_my_blog/" itemprop="url">
-                  Hexo+Github搭建个人博客
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-24T04:34:05+08:00" content="2016-08-24">
-              2016-08-24
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/写作/" itemprop="url" rel="index">
-                    <span itemprop="name">写作</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <!--
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>–&gt;</p>
-<p>最近正好有空琢磨琢磨琢磨搭建个人博客。于是乎就看到这边文章：<a href="http://www.jianshu.com/p/4eaddcbe4d12">5分钟 搭建免费个人博客</a>，但也再搭建过程中遇到一些问题，如果你也正想用这种方式搭建，那么我觉得我有必要把我遇到的问题及决绝办法说一下，免得大家踩同样的坑。</p>
-<p>step 1. 创建Github域名和空间</p>
-<p>step 2. 安装Nodejs的时候，按照文章中的方法用curl安装方式安装问nvm后，重启终端，再执行<code>nvm install 4</code>时，却提示：<br><code>nvm:command not find</code>。到这里，<a href="https://github.com/creationix/nvm">在这里</a>看到，用<code>open .bash_profile</code>命令打开.bash_profile文件（如果不存在，用<code>touch ~/.bash_profile</code>命令创建），然后在最后加上<code>source ~/.bashrc</code>，保存关闭。这时，.bash_profile文件的内容应该是这样的</p>
-<blockquote>
-<p>export NVM_DIR=”/Users/Jamin/.nvm”<br>[ -s “$NVM_DIR/nvm.sh” ] &amp;&amp; . “$NVM_DIR/nvm.sh”  # This loads nvm<br>source ~/.bashrc</p>
-</blockquote>
-<p>接下来再试下<code>$ nvm install</code>就可以找到命令了。</p>
-<p>step 3. 创建博客，安装主题，配置博客。</p>
-<h2 id="…"><a href="#…" class="headerlink" title="…"></a>…</h2><p>也就是，应该遇到的问题都在安装Nodejs的时候nvm命令找不到，导致浪费了很多时间，其实解决办法很简单，如上述，具体在<a href="https://github.com/creationix/nvm">creationix/nvm</a>。OK，可以开始写我们的文章了。</p>
--->
-          
-        
-      
-    </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/24/start_my_blog/" rel="next" title="Hexo+Github搭建个人博客">
+                <i class="fa fa-chevron-left"></i> Hexo+Github搭建个人博客
+              </a>
+            
+          </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -510,6 +416,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -529,8 +439,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -580,6 +499,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OS-X-、iOS系统架构"><span class="nav-number">2.</span> <span class="nav-text">OS X 、iOS系统架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mach-exceptions-与-POSIX-signals"><span class="nav-number">3.</span> <span class="nav-text">Mach exceptions 与 POSIX signals</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mach"><span class="nav-number">4.</span> <span class="nav-text">Mach</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BSD"><span class="nav-number">5.</span> <span class="nav-text">BSD</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实践"><span class="nav-number">6.</span> <span class="nav-text">实践</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后"><span class="nav-number">7.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -676,6 +606,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
