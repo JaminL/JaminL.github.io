@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -84,12 +84,30 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jamin's zone">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。
+应用最理想的启动时间在400毫秒，但永远不能超过20秒，如果超过20秒，操作系统（watchdog）会杀了你的应用程序，然后产生0x8badf00dcrash report。值得注意的是，Xcode在Debug的时候，会禁止“watchdog”。
+应用包括冷启动和热启动两种:
+
+冷启动。指的是当应用还没准备好运">
+<meta property="og:type" content="article">
+<meta property="og:title" content="优化应用启动">
+<meta property="og:url" content="http://yoursite.com/2016/09/06/Optimizing_App_Startup_Time/index.html">
 <meta property="og:site_name" content="Jamin's zone">
+<meta property="og:description" content="应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。
+应用最理想的启动时间在400毫秒，但永远不能超过20秒，如果超过20秒，操作系统（watchdog）会杀了你的应用程序，然后产生0x8badf00dcrash report。值得注意的是，Xcode在Debug的时候，会禁止“watchdog”。
+应用包括冷启动和热启动两种:
+
+冷启动。指的是当应用还没准备好运">
+<meta property="og:image" content="http://yoursite.com/images/Optimizing_App_Startup_Time/DYLD_PRINT_STATISTICS.png">
+<meta property="og:updated_time" content="2016-09-18T10:47:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jamin's zone">
+<meta name="twitter:title" content="优化应用启动">
+<meta name="twitter:description" content="应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。
+应用最理想的启动时间在400毫秒，但永远不能超过20秒，如果超过20秒，操作系统（watchdog）会杀了你的应用程序，然后产生0x8badf00dcrash report。值得注意的是，Xcode在Debug的时候，会禁止“watchdog”。
+应用包括冷启动和热启动两种:
+
+冷启动。指的是当应用还没准备好运">
+<meta name="twitter:image" content="http://yoursite.com/images/Optimizing_App_Startup_Time/DYLD_PRINT_STATISTICS.png">
 
 
 
@@ -110,9 +128,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/06/Optimizing_App_Startup_Time/"/>
 
-  <title> Jamin's zone </title>
+  <title> 优化应用启动 | Jamin's zone </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -133,9 +151,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -212,9 +228,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -234,10 +250,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/09/06/Optimizing_App_Startup_Time/" itemprop="url">
-                  优化应用启动
-                </a>
+                优化应用启动
               
             
           </h1>
@@ -296,9 +309,7 @@
       
 
       
-        
-          
-            <p>应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。</p>
+        <p>应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。</p>
 <p>应用最理想的启动时间在400毫秒，但永远不能超过20秒，如果超过20秒，操作系统（watchdog）会杀了你的应用程序，然后产生<code>0x8badf00d</code>crash report。值得注意的是，Xcode在Debug的时候，会禁止“watchdog”。</p>
 <p>应用包括冷启动和热启动两种:</p>
 <ul>
@@ -367,278 +378,59 @@ C++ statics with non-trivial constructors
 <p>[Optimizing App Startup Time] (<a href="https://developer.apple.com/videos/play/wwdc2016/406/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/406/</a>)</p>
 <hr>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/01/Mach_Exceptions/" itemprop="url">
-                  浅谈Mach Exceptions
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-01T04:34:05+08:00" content="2016-09-01">
-              2016-09-01
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/写作/" itemprop="url" rel="index">
-                    <span itemprop="name">写作</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <!-- 2016-08-24 04:34:05 -->
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>大家都可能都在自己的应用中集成Crash收集服务，通常使用<code>NSSetUncaughtExceptionHandler()</code> + <code>signal() / sigaction()</code>的方式。它可以帮助我们收集到大部分Crash，直到后来发现stack overflow并不能被以上方法扑捉到，而且其它一些SDK也未能收集。那这篇文章简单介绍下Mach异常与signal的联系。</p>
-<hr>
-<h1 id="OS-X-、iOS系统架构"><a href="#OS-X-、iOS系统架构" class="headerlink" title="OS X 、iOS系统架构"></a>OS X 、iOS系统架构</h1><p><img src="/images/Mach_Exceptions/osx_architecture-kernels_drivers_2x.png" alt="osx_architecture-kernels_drivers"></p>
-<p>这张图片来之苹果Mac Technology Overview，除了用户体验层，OS X与iOS架构大体上是一直的。它们内核核心都是XNU(包含Mach、BSD)。Mach是微内核，负责操作系统中基本职责：进程和线程抽象、虚拟内存管理、任务调度、进程间通信和消息传递机制。BSD层简历在Mach上，提供一套可靠且更现代的API，提供了POSIX兼容性。<br>本文用到的XNU的版本号为3248.60.10的源码，<a href="http://opensource.apple.com/tarballs/xnu/xnu-3248.60.10.tar.gz">下载地址。</a><br>你也可以在<a href="http://opensource.apple.com">http://opensource.apple.com</a> 中下载历史版本。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/01/Mach_Exceptions/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/01/Mach_Exceptions/" rel="next" title="浅谈Mach Exceptions">
+                <i class="fa fa-chevron-left"></i> 浅谈Mach Exceptions
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/24/start_my_blog/" itemprop="url">
-                  Hexo+Github搭建个人博客
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-24T04:34:05+08:00" content="2016-08-24">
-              2016-08-24
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/写作/" itemprop="url" rel="index">
-                    <span itemprop="name">写作</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>最近正好有空琢磨琢磨琢磨搭建个人博客。于是乎就看到这边文章：<a href="http://www.jianshu.com/p/4eaddcbe4d12" target="_blank" rel="external">5分钟 搭建免费个人博客</a>，但也再搭建过程中遇到一些问题，如果你也正想用这种方式搭建，那么我觉得我有必要把我遇到的问题及决绝办法说一下，免得大家踩同样的坑。</p>
-<p>step 1. 创建Github域名和空间</p>
-<p>step 2. 安装Nodejs的时候，按照文章中的方法用curl安装方式安装问nvm后，重启终端，再执行<code>nvm install 4</code>时，却提示：<br><code>nvm:command not find</code>。到这里，<a href="https://github.com/creationix/nvm" target="_blank" rel="external">在这里</a>看到，用<code>open .bash_profile</code>命令打开.bash_profile文件（如果不存在，用<code>touch ~/.bash_profile</code>命令创建），然后在最后加上<code>source ~/.bashrc</code>，保存关闭。这时，.bash_profile文件的内容应该是这样的</p>
-<blockquote>
-<p>export NVM_DIR=”/Users/Jamin/.nvm”<br>[ -s “$NVM_DIR/nvm.sh” ] &amp;&amp; . “$NVM_DIR/nvm.sh”  # This loads nvm<br>source ~/.bashrc</p>
-</blockquote>
-<p>接下来再试下<code>$ nvm install</code>就可以找到命令了。</p>
-<p>step 3. 创建博客，安装主题，配置博客。</p>
-<p> <strong>…</strong></p>
-<p>也就是，应该遇到的问题都在安装Nodejs的时候nvm命令找不到，导致浪费了很多时间，其实解决办法很简单，如上述，具体在<a href="https://github.com/creationix/nvm" target="_blank" rel="external">creationix/nvm</a>。OK，可以开始写我们的文章了。</p>
-<!-- $ hexo new "My New Post" -->
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -646,6 +438,10 @@ C++ statics with non-trivial constructors
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -665,8 +461,17 @@ C++ statics with non-trivial constructors
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -736,6 +541,17 @@ C++ statics with non-trivial constructors
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dylib-加载"><span class="nav-number">1.</span> <span class="nav-text">Dylib 加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rebase-Binding"><span class="nav-number">2.</span> <span class="nav-text">Rebase/Binding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ObjC-Setup"><span class="nav-number">3.</span> <span class="nav-text">ObjC Setup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Initializers"><span class="nav-number">4.</span> <span class="nav-text">Initializers</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -832,6 +648,10 @@ C++ statics with non-trivial constructors
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
