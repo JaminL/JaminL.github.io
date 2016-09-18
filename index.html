@@ -297,8 +297,7 @@
 
       
         
-          
-            <p>应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。</p>
+          <h1 id="应用启动"><a href="#应用启动" class="headerlink" title="应用启动"></a>应用启动</h1><p>应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。</p>
 <p>应用最理想的启动时间在400毫秒，但永远不能超过20秒，如果超过20秒，操作系统（watchdog）会杀了你的应用程序，然后产生<code>0x8badf00d</code>crash report。值得注意的是，Xcode在Debug的时候，会禁止“watchdog”。</p>
 <p>应用包括冷启动和热启动两种:</p>
 <ul>
@@ -307,67 +306,12 @@
 <li><p>热启动。指的是应用已经运行但是在后台被挂起（比如用户点击了 home 健），我们只需要知道在何时应用进入后台。在这种情况下，我们的应用通过 applicationWillEnterForeground: 接收到前台的事件，紧接着应用恢复。</p>
 </li>
 </ul>
-<p>可见冷启动测量更为重要。</p>
-<p>应用启动过程：<code>parse images</code>, <code>map images</code>, <code>rebase images</code>, <code>bind images</code>, <code>run image initializers</code>, <code>call main()</code>, <code>call UIApplicationMain()</code>、<code>Call applicationWillFinishLaunching</code>.</p>
-<p>使用DYLD环境变量 <code>DYLD_PRINT_STATISTICS</code> 统计 <code>main()</code>之前的时间。</p>
-<p><img src="/images/Optimizing_App_Startup_Time/DYLD_PRINT_STATISTICS.png" alt="DYLD_PRINT_STATISTICS"></p>
-<p>点击’Eidt schemes’，添加<code>DYLD_PRINT_STATISTICS</code>环境变量。然后重新运行，可以看到console的输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Total pre-main time: 204.00 milliseconds (100.0%)</div><div class="line">         dylib loading time:  30.85 milliseconds (15.1%)</div><div class="line">        rebase/binding time: 152.04 milliseconds (74.5%)</div><div class="line">            ObjC setup time:  12.40 milliseconds (6.0%)</div><div class="line">           initializer time:   8.63 milliseconds (4.2%)</div><div class="line">           slowest intializers :</div><div class="line">               libSystem.dylib :   1.75 milliseconds (0.8%)</div><div class="line">                 AppLaunchTest :   4.49 milliseconds (2.2%)</div></pre></td></tr></table></figure>
-<p>附表: 其他DYLD_PRINT环境变量</p>
-<table>
-<thead>
-<tr>
-<th>Environment variable</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DYLD_PRINT_LIBRARIES</td>
-<td>Logs when images are loaded.</td>
-</tr>
-<tr>
-<td>DYLD_PRINT_LIBRARIES_POST_LAUNCH</td>
-<td>Logs when images are loaded as a result of a dlopen call. Includes a dynamic libraries’ dependent libraries.</td>
-</tr>
-<tr>
-<td>DYLD_PRINT_STATISTICS</td>
-<td>Logs statistical information on an application’s launch process, such as how many images were loaded, when the application finishes launching.</td>
-</tr>
-<tr>
-<td>DYLD_PRINT_INITIALIZERS</td>
-<td>Logs when the dynamic loader calls initializer and finalizer functions.</td>
-</tr>
-<tr>
-<td>DYLD_PRINT_SEGMENTS</td>
-<td>Logs when the dynamic loader maps a segment of a dynamic library to the current process’s address space.</td>
-</tr>
-<tr>
-<td>DYLD_PRINT_BINDINGS</td>
-<td>Logs when the dynamic loader binds an undefined external symbol with its definition.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="Dylib-加载"><a href="#Dylib-加载" class="headerlink" title="Dylib 加载"></a>Dylib 加载</h2><p>平均应用有100到400个dylibs。其中大部分是系统dylibs，系统dylibs加载是非常快速的。</p>
-<p>在这里，我们只需使用更少的dylibs，合并现有dylibs，使用静态库；或者使用dlopen()延迟加载，但它会造成性能问题，它实际上导致了后来做更多的工作，但它推迟加载了。</p>
-<h2 id="Rebase-Binding"><a href="#Rebase-Binding" class="headerlink" title="Rebase/Binding"></a>Rebase/Binding</h2><p>减少 __DATA pointers<br>减少 Objective C 元数据(Classes, selectors, and categories)<br>减少使用 C++ 虚拟函数<br>使用 Swift的structs<br>对于 machine generated code，使用 offsets 代替 pointers</p>
-<h2 id="ObjC-Setup"><a href="#ObjC-Setup" class="headerlink" title="ObjC Setup"></a>ObjC Setup</h2><p>这一过程完成一下事情，而且都是必须的：<br>Class registration<br>Non-fragile ivars offsets updated<br>Category registration<br>Selector uniquing</p>
-<h2 id="Initializers"><a href="#Initializers" class="headerlink" title="Initializers"></a>Initializers</h2><p>ObjC 使用 +initiailize() 代替 +load()<br>C/C++ 使用 <strong>attribute</strong>((constructor))，它会在 main()函数执行之前被自动的执行。<br>使用<code>dispatch_once()</code> <code>pthread_once()</code> <code>std::once()</code></p>
-<!--Implicit
-C++ statics with non-trivial constructors
-• Replace with call site initializers 
-• Only set simple values (PODs) 
-• -Wglobal-constructors
-• Rewrite in Swift-->
-<blockquote>
-<p>Do not call dlopen() in initializers<br>Do not create threads in initializers</p>
-</blockquote>
-<hr>
-<p>通过减少dylibs的数量，降低ObjC类的数量，并消除static initializers，来减少应用程序启动时间。还可以使用Swift改善它。</p>
-<p>[Optimizing App Startup Time] (<a href="https://developer.apple.com/videos/play/wwdc2016/406/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/406/</a>)</p>
-<hr>
-
-          
+<p>可见冷启动测量更为重要。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/06/Optimizing_App_Startup_Time/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

@@ -84,29 +84,29 @@
 
 
 
-<meta name="description" content="应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。
+<meta name="description" content="应用启动应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。
 应用最理想的启动时间在400毫秒，但永远不能超过20秒，如果超过20秒，操作系统（watchdog）会杀了你的应用程序，然后产生0x8badf00dcrash report。值得注意的是，Xcode在Debug的时候，会禁止“watchdog”。
 应用包括冷启动和热启动两种:
 
-冷启动。指的是当应用还没准备好运">
+冷启动。指的是当应用还没">
 <meta property="og:type" content="article">
 <meta property="og:title" content="优化应用启动">
 <meta property="og:url" content="http://yoursite.com/2016/09/06/Optimizing_App_Startup_Time/index.html">
 <meta property="og:site_name" content="Jamin's zone">
-<meta property="og:description" content="应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。
+<meta property="og:description" content="应用启动应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。
 应用最理想的启动时间在400毫秒，但永远不能超过20秒，如果超过20秒，操作系统（watchdog）会杀了你的应用程序，然后产生0x8badf00dcrash report。值得注意的是，Xcode在Debug的时候，会禁止“watchdog”。
 应用包括冷启动和热启动两种:
 
-冷启动。指的是当应用还没准备好运">
+冷启动。指的是当应用还没">
 <meta property="og:image" content="http://yoursite.com/images/Optimizing_App_Startup_Time/DYLD_PRINT_STATISTICS.png">
-<meta property="og:updated_time" content="2016-09-18T10:47:48.000Z">
+<meta property="og:updated_time" content="2016-09-18T11:00:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="优化应用启动">
-<meta name="twitter:description" content="应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。
+<meta name="twitter:description" content="应用启动应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。
 应用最理想的启动时间在400毫秒，但永远不能超过20秒，如果超过20秒，操作系统（watchdog）会杀了你的应用程序，然后产生0x8badf00dcrash report。值得注意的是，Xcode在Debug的时候，会禁止“watchdog”。
 应用包括冷启动和热启动两种:
 
-冷启动。指的是当应用还没准备好运">
+冷启动。指的是当应用还没">
 <meta name="twitter:image" content="http://yoursite.com/images/Optimizing_App_Startup_Time/DYLD_PRINT_STATISTICS.png">
 
 
@@ -309,7 +309,7 @@
       
 
       
-        <p>应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。</p>
+        <h1 id="应用启动"><a href="#应用启动" class="headerlink" title="应用启动"></a>应用启动</h1><p>应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。</p>
 <p>应用最理想的启动时间在400毫秒，但永远不能超过20秒，如果超过20秒，操作系统（watchdog）会杀了你的应用程序，然后产生<code>0x8badf00d</code>crash report。值得注意的是，Xcode在Debug的时候，会禁止“watchdog”。</p>
 <p>应用包括冷启动和热启动两种:</p>
 <ul>
@@ -318,9 +318,9 @@
 <li><p>热启动。指的是应用已经运行但是在后台被挂起（比如用户点击了 home 健），我们只需要知道在何时应用进入后台。在这种情况下，我们的应用通过 applicationWillEnterForeground: 接收到前台的事件，紧接着应用恢复。</p>
 </li>
 </ul>
-<p>可见冷启动测量更为重要。</p>
+<p>可见冷启动测量更为重要。<br><a id="more"></a></p>
 <p>应用启动过程：<code>parse images</code>, <code>map images</code>, <code>rebase images</code>, <code>bind images</code>, <code>run image initializers</code>, <code>call main()</code>, <code>call UIApplicationMain()</code>、<code>Call applicationWillFinishLaunching</code>.</p>
-<p>使用DYLD环境变量 <code>DYLD_PRINT_STATISTICS</code> 统计 <code>main()</code>之前的时间。</p>
+<h1 id="时间统计"><a href="#时间统计" class="headerlink" title="时间统计"></a>时间统计</h1><p>使用DYLD环境变量 <code>DYLD_PRINT_STATISTICS</code> 统计 <code>main()</code>之前的时间。</p>
 <p><img src="/images/Optimizing_App_Startup_Time/DYLD_PRINT_STATISTICS.png" alt="DYLD_PRINT_STATISTICS"></p>
 <p>点击’Eidt schemes’，添加<code>DYLD_PRINT_STATISTICS</code>环境变量。然后重新运行，可以看到console的输出：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Total pre-main time: 204.00 milliseconds (100.0%)</div><div class="line">         dylib loading time:  30.85 milliseconds (15.1%)</div><div class="line">        rebase/binding time: 152.04 milliseconds (74.5%)</div><div class="line">            ObjC setup time:  12.40 milliseconds (6.0%)</div><div class="line">           initializer time:   8.63 milliseconds (4.2%)</div><div class="line">           slowest intializers :</div><div class="line">               libSystem.dylib :   1.75 milliseconds (0.8%)</div><div class="line">                 AppLaunchTest :   4.49 milliseconds (2.2%)</div></pre></td></tr></table></figure>
@@ -363,7 +363,7 @@
 <p>在这里，我们只需使用更少的dylibs，合并现有dylibs，使用静态库；或者使用dlopen()延迟加载，但它会造成性能问题，它实际上导致了后来做更多的工作，但它推迟加载了。</p>
 <h2 id="Rebase-Binding"><a href="#Rebase-Binding" class="headerlink" title="Rebase/Binding"></a>Rebase/Binding</h2><p>减少 __DATA pointers<br>减少 Objective C 元数据(Classes, selectors, and categories)<br>减少使用 C++ 虚拟函数<br>使用 Swift的structs<br>对于 machine generated code，使用 offsets 代替 pointers</p>
 <h2 id="ObjC-Setup"><a href="#ObjC-Setup" class="headerlink" title="ObjC Setup"></a>ObjC Setup</h2><p>这一过程完成一下事情，而且都是必须的：<br>Class registration<br>Non-fragile ivars offsets updated<br>Category registration<br>Selector uniquing</p>
-<h2 id="Initializers"><a href="#Initializers" class="headerlink" title="Initializers"></a>Initializers</h2><p>ObjC 使用 +initiailize() 代替 +load()<br>C/C++ 使用 <strong>attribute</strong>((constructor))，它会在 main()函数执行之前被自动的执行。<br>使用<code>dispatch_once()</code> <code>pthread_once()</code> <code>std::once()</code></p>
+<h2 id="Initializers"><a href="#Initializers" class="headerlink" title="Initializers"></a>Initializers</h2><p>ObjC 使用 +initiailize() 代替 +load()<br>C/C++ 使用 <strong>attribute</strong>((constructor))，它会在 main()函数执行之前被自动的执行。<br>使用<code>dispatch_once()</code>、<code>pthread_once()</code>、<code>std::once()</code></p>
 <!--Implicit
 C++ statics with non-trivial constructors
 • Replace with call site initializers 
@@ -374,9 +374,7 @@ C++ statics with non-trivial constructors
 <p>Do not call dlopen() in initializers<br>Do not create threads in initializers</p>
 </blockquote>
 <hr>
-<p>通过减少dylibs的数量，降低ObjC类的数量，并消除static initializers，来减少应用程序启动时间。还可以使用Swift改善它。</p>
-<p>[Optimizing App Startup Time] (<a href="https://developer.apple.com/videos/play/wwdc2016/406/" target="_blank" rel="external">https://developer.apple.com/videos/play/wwdc2016/406/</a>)</p>
-<hr>
+<p>我们通过减少dylibs的数量，降低ObjC类的数量，并消除static initializers，来减少应用程序启动时间，还可以使用Swift改善它。更多内容在<a href="https://developer.apple.com/videos/play/wwdc2016/406/" target="_blank" rel="external">Optimizing App Startup Time</a></p>
 
       
     </div>
@@ -548,7 +546,7 @@ C++ statics with non-trivial constructors
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dylib-加载"><span class="nav-number">1.</span> <span class="nav-text">Dylib 加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rebase-Binding"><span class="nav-number">2.</span> <span class="nav-text">Rebase/Binding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ObjC-Setup"><span class="nav-number">3.</span> <span class="nav-text">ObjC Setup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Initializers"><span class="nav-number">4.</span> <span class="nav-text">Initializers</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#应用启动"><span class="nav-number">1.</span> <span class="nav-text">应用启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#时间统计"><span class="nav-number">2.</span> <span class="nav-text">时间统计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dylib-加载"><span class="nav-number">2.1.</span> <span class="nav-text">Dylib 加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rebase-Binding"><span class="nav-number">2.2.</span> <span class="nav-text">Rebase/Binding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ObjC-Setup"><span class="nav-number">2.3.</span> <span class="nav-text">ObjC Setup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Initializers"><span class="nav-number">2.4.</span> <span class="nav-text">Initializers</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
