@@ -298,7 +298,7 @@
       
         
           <h1 id="应用启动"><a href="#应用启动" class="headerlink" title="应用启动"></a>应用启动</h1><p>应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。</p>
-<p>应用最理想的启动时间在400毫秒，但永远不能超过20秒，如果超过20秒，操作系统（watchdog）会杀了你的应用程序，然后产生<code>0x8badf00d</code>crash report。值得注意的是，Xcode在Debug的时候，会禁止“watchdog”。</p>
+<p>应用最理想的启动时间在400毫秒，但永远不能超过20秒，如果超过20秒，操作系统（watchdog）会杀了你的应用程序，然后产生<code>0x8badf00d</code>的crash report。值得注意的是，Xcode在Debug的时候，会禁止“watchdog”。</p>
 <p>应用包括冷启动和热启动两种:</p>
 <ul>
 <li><p>冷启动。指的是当应用还没准备好运行时，我们必须加载和构建整个应用。这包括设置屏幕底部的分栏菜单，确保用户是否被合适地登录，以及处理其他更多的事情。“引导”程序是在applicationDidFinishLaunching:withOptions:方法中开始的。</p>
