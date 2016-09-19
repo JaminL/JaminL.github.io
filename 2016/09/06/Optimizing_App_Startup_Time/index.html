@@ -99,7 +99,7 @@
 
 冷启动。指的是当应用还">
 <meta property="og:image" content="http://yoursite.com/images/Optimizing_App_Startup_Time/DYLD_PRINT_STATISTICS.png">
-<meta property="og:updated_time" content="2016-09-18T11:13:54.000Z">
+<meta property="og:updated_time" content="2016-09-19T08:23:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="优化应用启动">
 <meta name="twitter:description" content="应用启动应用启动时间长短对用户第一次体验至关重要，应用的快速启动，能够给你的用户一个好的体验。
@@ -318,7 +318,7 @@
 <li><p>热启动。指的是应用已经运行但是在后台被挂起（比如用户点击了 home 健），我们只需要知道在何时应用进入后台。在这种情况下，我们的应用通过 applicationWillEnterForeground: 接收到前台的事件，紧接着应用恢复。</p>
 </li>
 </ul>
-<p>可见冷启动测量更为重要。<br><a id="more"></a></p>
+<p>可见冷启动测量更为重要。</p>
 <h1 id="时间测量"><a href="#时间测量" class="headerlink" title="时间测量"></a>时间测量</h1><p>应用启动过程：<code>parse images</code>, <code>map images</code>, <code>rebase images</code>, <code>bind images</code>, <code>run image initializers</code>, <code>call main()</code>, <code>call UIApplicationMain()</code>、<code>Call applicationWillFinishLaunching</code>. 但这里只讲 <code>call main()</code>之前的时间测量、优化。</p>
 <p>下面使用DYLD环境变量 <code>DYLD_PRINT_STATISTICS</code> 测量 <code>main()</code>之前的时间。</p>
 <p><img src="/images/Optimizing_App_Startup_Time/DYLD_PRINT_STATISTICS.png" alt="DYLD_PRINT_STATISTICS"></p>
